@@ -9,5 +9,8 @@ const criarjanela = () => {
 }
 app.whenReady().then(() => {
     criarjanela()
-    console.log('realizando Electron !!');
+    console.log('Electron funcionando!!');
+})
+.catch((erro)=> {
+    console.error(erro);
 })

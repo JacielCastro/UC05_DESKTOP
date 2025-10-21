@@ -6,7 +6,34 @@
     <title> PRIMEIROS PASSO EM ELECTRON </title>
 </head>
 <body>
-    <h1> HELLO WORLD !!!</h1>
-    <h1> MIRA BOA </h1>
+    <!-- <h1> HELLO WORLD !!!</h1>
+    <h1> MIRA BOA está de folga !!! </h1> -->
+    <label for="nome"> nome </label>
+    <input type="text" id="nome" placeholder=" Informe o seu nome ">
+    <button id=" botao" onclick="pegarNome()"> enviar </button>
+    <br><br>
+    <label for="teste"> teste </label>
+    <input type="number" id="teste" placeholder=" teste o número se é par ou impar">
+    <button id="botao_teste" onclick="testeImpar_Par()"> enviar </button>
+    
+    <script>
+        function testeImpar_Par() {
+            let numero = document.getElementById('teste').value
+            if (teste % 2 === 0) {
+                alert(`O número ${botao_teste}} é Par`);
+            }else{
+                alert(`O número ${teste} é Impar`);
+            }
+            alert(`O resultado do teste --> ${teste}`)
+            document.getElementById('teste').value = ''
+        }
+        function pegarNome() {
+            let conteudo = document.getElementById('nome').value
+            alert(`Olá ${conteudo}`)
+            document.getElementById('nome').value = ''
+            document.getElementById('texto').innerHTML = `olá, ${conkteudo} !!!`
+        }
+
+    </script>
 </body>
 </html>
