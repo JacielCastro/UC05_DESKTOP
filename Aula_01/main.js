@@ -5,7 +5,7 @@ const criarjanela = () => {
     width: 800,
     height: 800
      })
-     janela.loadFile("index.html")
+     janela.loadFile("./Exc.01_html/Ques02.html")
 }
 app.whenReady().then(() => {
     criarjanela()
