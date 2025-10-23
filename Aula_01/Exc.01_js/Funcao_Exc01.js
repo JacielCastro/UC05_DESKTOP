@@ -15,17 +15,22 @@ function par_Impar() {
         alert(`O número ${numero_p_i} é IMPAR`)
     }    
 }
-function calculaNotas() {
-    let nota_01 = document.getElementById('teste_nota01').value
-    let nota_02 = document.getElementById('teste_nota02').value
+function calculaMedia() {
+    let nota_01 = parseFloat(document.getElementById('nota_01').value)// parseFloat() CONVERTE O TEXTO DIGITADO PARA NÚMERO DECOMAL
+    let nota_02 = parseFloat(document.getElementById('nota_02').value)
+    
+    if (isNaN (nota_01) || isNaN (nota_02)) {
+        alert(`Por favor, informe as duas notas`)
+        return;
+    }
     media01 = nota_01 * 0.4
     media02 = nota_02 * 0.6
     media_geral = media01 + media02
-    alert(`A média geral ${media_geral}`)
+    alert(`Média da primeira nota --> ${media01}\nMédia da segunda nota --> ${media02}\nA média geral ${media_geral.toFixed(2)}`).toFixed(2)
 }
-// function calculandoMedia(valor01,valor02) {
-//     let media_geral = document.getElementById('media').value
-//     media_geral = media01 + media02
-//     alert(`O resultado da sua media ${media_geral}`)
-
-// }
+function limparCampos() {
+    // Pega os elementos dos inputs
+    document.getElementById("nota_01").value = "";
+    document.getElementById("nota_02").value = "";
+    alert("Os campos foram limpos!");// Mostra uma mensagem opcional
+}
