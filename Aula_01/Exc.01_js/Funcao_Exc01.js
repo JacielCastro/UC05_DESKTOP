@@ -16,8 +16,8 @@ function par_Impar() {
     }    
 }
 function calculaMedia() {
-    let nota_01 = parseFloat(document.getElementById('nota_01').value)// parseFloat() CONVERTE O TEXTO DIGITADO PARA NÚMERO DECOMAL
-    let nota_02 = parseFloat(document.getElementById('nota_02').value)
+    let nota_01 = (document.getElementById('nota_01').value)// parseFloat() CONVERTE O TEXTO DIGITADO PARA NÚMERO DECOMAL
+    let nota_02 = (document.getElementById('nota_02').value)
     
     if (isNaN (nota_01) || isNaN (nota_02)) {
         alert(`Por favor, informe as duas notas`)
@@ -26,7 +26,7 @@ function calculaMedia() {
     media01 = nota_01 * 0.4
     media02 = nota_02 * 0.6
     media_geral = media01 + media02
-    alert(`Média da primeira nota --> ${media01}\nMédia da segunda nota --> ${media02}\nA média geral ${media_geral.toFixed(2)}`).toFixed(2)
+    alert(`Média da primeira nota --> ${media01}\nMédia da segunda nota --> ${media02}\nA média geral ${media_geral}`).toFixed(2)
 }
 function limparCampos() {
     // Pega os elementos dos inputs
