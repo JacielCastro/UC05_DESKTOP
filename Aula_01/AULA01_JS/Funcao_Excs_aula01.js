@@ -16,7 +16,7 @@ function par_Impar() {
     }    
 }
 function calculaMedia() {
-    let nota_01 = (document.getElementById('nota_01').value)// parseFloat() CONVERTE O TEXTO DIGITADO PARA NÚMERO DECOMAL
+    let nota_01 = (document.getElementById('nota_01').value)
     let nota_02 = (document.getElementById('nota_02').value)
     
     if (isNaN (nota_01) || isNaN (nota_02)) {
@@ -28,9 +28,32 @@ function calculaMedia() {
     media_geral = media01 + media02
     alert(`Média da primeira nota --> ${media01}\nMédia da segunda nota --> ${media02}\nA média geral ${media_geral}`).toFixed(2)
 }
-function limparCampos() {
+function calculaKelvin() {
+    let convesor = Number(document.getElementById('celsius').value)
+    let resultado 
+    resultado = convesor + 273.15
+    alert(`O valor convertido em KELVIN --> ${resultado.toFixed(2)}`) 
+}
+function calculaFahrenheit(){
+    let valor = Number(document.getElementById('celsius').value)
+    let resultado
+    resultado = valor * 1.8 + 32
+    alert (`O valor convertido em FAHRENHEIT --> ${resultado.toFixed(2)}`)
+}
+function limparCampos01() {
+    // Pega os elementos dos inputs
+    document.getElementById("numero").value = "";
+    document.getElementById("teste_impar_Par").value = "";
+    alert("Os campos foram limpos!");// Mostra uma mensagem opcional
+}
+function limparCampos02() {
     // Pega os elementos dos inputs
     document.getElementById("nota_01").value = "";
     document.getElementById("nota_02").value = "";
+    alert("Os campos foram limpos!");// Mostra uma mensagem opcional
+}
+function limparCampos03() {
+    // Pega os elementos dos inputs
+    document.getElementById("celsius").value = "";
     alert("Os campos foram limpos!");// Mostra uma mensagem opcional
 }

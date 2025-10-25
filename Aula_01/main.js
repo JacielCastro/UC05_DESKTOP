@@ -4,8 +4,8 @@ const criarjanela = () => {
     const janela = new BrowserWindow({
     width: 800,
     height: 800
-     })
-     janela.loadFile("./Exc.01_html/Ques02.html")
+    })
+    janela.loadFile("./aula02_html/ques01.html")
 }
 app.whenReady().then(() => {
     criarjanela()
