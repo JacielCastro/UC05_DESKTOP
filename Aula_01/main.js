@@ -11,19 +11,21 @@ const criarjanela = () => {
         devTools: true
     }
     })
-    janela.loadFile("./aula02_html/ques01.html")
+    janela.loadFile("./aula02_html/calculadora.html")
     janela.webContents.openDevTools()
-    janela.remotoMenu()
+    janela.removeMenu()
 }
 app.whenReady().then(() => {
     criarjanela()
     console.log('Electron funcionando!!');
 })
+.catch((erro)=> {
+    console.error(erro);
+})
+
+
 app.on('window-all-closed',()=>{
     if(process.platform !== 'drawin'){
         app.quit()
     }
     })
-.catch((erro)=> {
-    console.error(erro);
-})

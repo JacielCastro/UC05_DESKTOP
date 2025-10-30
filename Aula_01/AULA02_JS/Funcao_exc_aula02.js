@@ -8,3 +8,10 @@ const conversor_Euro = () => {
     resultado = moeda / 6.353 
     alert(`O valor da converção --> ${resultado.toFixed(2)}`)
 }
+// FUNCÕES DA CALCULADORA
+const limpar = () =>{
+    document.getElementById('limpar').value = " "
+}
+const numero_botão = () => {
+    let 
+}
