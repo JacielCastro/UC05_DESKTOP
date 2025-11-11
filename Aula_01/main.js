@@ -1,4 +1,5 @@
-import { app, BrowserWindow, nativeTheme, ipcMain} from "electron";
+import { app, BrowserWindow, nativeTheme, ipcMain, Menu} from "electron";
+import { type } from "node:os";
 import path from 'node:path'
 import { fileURLToPath } from "node:url"
 
@@ -22,14 +23,35 @@ const criarjanela = () => {
             setZoomFactor: 1.0 // deixando o zoom em 100%
     }
     })
-    janela.loadFile("./aula02_html/calculadora.html")
-    janela.webContents.openDevTools()
+    janela.loadFile("./aula01_html/ques02.html")
+    // janela.webContents.openDevTools()
     janela.removeMenu()
     janela.webContents.on('did-finish-load',() => {// EVENTO DISPARADO QUANDO A JANELA TERMINA DE CARREGAR
         janela.webContents.setZoomFactor(1.0)
     })
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template))// criação do menu
 }
-
+const template = [
+    {label: "Aplicação",
+        submenu:[
+            {label: "Novo", click: () => criarjanela()},
+            {type: "separator"},
+            {label: "Sair", role: 'quit'}]},
+    {label: "sobre"},
+    {label: "Exibir",
+        submenu: [{label: "Aparência",
+            submenu:[
+                {label: "Zoom+", type: "radio", checked: false,
+                    click: () => {
+                        let janelaatual = janela.webContents.getZoomFactor()
+                        janela.webContents.setZoomFactor(0.1 + janelaatual)},
+                accelerator: "ctrl + = ",},
+                {label: "zoom-", role:"zoomout"},
+                {label: "Trocar tema", type: "checkbox", checked: false, 
+                    click: () => nativeTheme.themeSource = "dark"}
+            ]
+        }]}
+]
 app.whenReady().then(() => {
     criarjanela()
 })
@@ -69,9 +91,9 @@ ipcMain.on('envia-msg', (event, msg) => {
     event.reply('devolver-msg', 'Olá')
 })
 
-.catch((erro)=> {
-    console.error(erro);
-})
+
+
+
 
 
 
