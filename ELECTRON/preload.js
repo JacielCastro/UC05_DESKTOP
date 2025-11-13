@@ -1,6 +1,6 @@
 import {contextBridge, ipcRenderer} from 'electron'
 
-contextBridge.exposeInMainWorld('api', {
+contextBridge.exposeInMainWorld('api', { 
     nome: 'Aplicação Desktop',
     versaoNode: () => { return `NODE - ${process.versions.node}`},
     versaoElectron: () => { return `ELECTRON - ${process.versions.electron}`},
