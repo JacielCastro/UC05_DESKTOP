@@ -1,20 +1,19 @@
 {
-  "name": "aula_01",
+  "name": "arquivos",
   "version": "1.0.0",
+  "description": "",
   "main": "main.js",
   "type": "module",
-  "dependencies": {
-    
-    "electron": "^38.3.0",
-    "electronmon": "^2.0.4"
-   
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electronmon main.js"
+    "start": "electron .",
+    "dev": "electronmon ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {}
+  "dependencies": {
+    "electron": "^39.2.3",
+    "electronmon": "^2.0.4"
+  }
 }

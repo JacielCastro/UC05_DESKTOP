@@ -32,7 +32,7 @@ const criarjanela = () => {
     Menu.setApplicationMenu(Menu.buildFromTemplate(template))// criação do menu
 }
 const template = [
-    {label: "Aplicação",
+    {label: "Aplicação",  
         submenu:[
             {label: "Novo", click: () => criarjanela()},
             {type: "separator"},

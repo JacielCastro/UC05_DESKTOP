@@ -1,0 +1,121 @@
+import {app, BrowserWindow, dialog, ipcMain, Menu} from 'electron'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import fs from 'fs'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename) 
+
+let janela = null
+
+const criarJanela = () => {
+    janela = new BrowserWindow({
+        title: 'Aplicação Desktop',
+        height: 600,
+        width: 600,
+        resizable: true,
+        webPreferences: {
+            contextIsolation: true,
+            nodeIntegration: false,
+            preload: path.join(__dirname, 'preload.js'),
+            sandbox: false
+        }      
+    })
+    // janela.webContents.openDevTools()
+    Menu.setApplicationMenu(Menu.buildFromTemplate(template)) // CRIANDO MENU
+    janela.loadFile(path.join(__dirname,'index.html'))
+}
+app.whenReady().then(() => {
+    criarJanela()
+})
+
+let caminhoArquivo = path.join(__dirname,'arquivo.txt')
+
+//Função para salvar o arquivo 
+function escreverArq (conteudo){
+    try{
+        fs.writeFileSync(caminhoArquivo, conteudo, 'utf-8') // escreve no aquivo
+    }catch(err){
+        console.error(err)
+    }
+}
+
+//função para abrir o arquivo
+async function lerArq(){
+    let {canceled, filePaths} = await dialog.showOpenDialog({
+        title: 'Abrir caminhoArquivo',
+        defaultPath: 'caminhoArquivo.txt',
+        filters: [{name: 'Texto', extensions: ['txt', 'doc']}],
+        properties: ['openFile']
+    })
+    if(canceled){
+        return
+    }
+    caminhoArquivo = filePaths[0]
+    try {
+        let conteudo = fs.readFileSync(caminhoArquivo, 'utf-8')
+        return conteudo
+    } catch (err) {
+        console.error(err)
+    }  
+}
+
+ipcMain.handle('salvar-arq', (event, texto) =>{
+    // console.log('Texto: ',texto)
+    escreverArq(texto)    
+    return caminhoArquivo
+})
+
+ipcMain.handle('abrir-arq', (event) =>{
+    let conteudo = lerArq()
+    return conteudo
+})
+
+ipcMain.handle('salvarComo-arq', (event, texto) => {
+   dialog.showSaveDialog({
+        title: 'Salvar como',
+        defaultPath: 'caminhoArquivo',
+        filters: [{name: 'Texto', extensions: ['txt', 'doc']}]
+    }).then((resultado) => {
+        if(resultado.canceled) return
+        caminhoArquivo = resultado.filePath
+        escreverArq(texto)        
+    })
+    return caminhoArquivo     
+})
+
+//criação do template do menu
+const template = [
+    {label: 'Menu', 
+        submenu: [
+        {label: 'Arquivo', 
+            submenu:[
+            {label: 'Novo Arquivo'},
+            {label: 'Novo Janela'}
+        ]},
+    {label: 'Abrir'},
+    {label: 'Salvar', 
+        submenu: [
+            {label: 'Salvar'},
+            {label: 'Salvar como'}
+        ]},
+    {label: 'Sair'}
+        ] 
+    },
+    {label: 'Editar', 
+        submenu: [
+        {label: 'Desfazer', role: 'undo'},
+        {label: 'Refazer', role: 'remake'},
+        {label: 'Copiar', role: 'copy'},
+        {label: 'Colar', role: 'to paste'},
+        {label: 'Recortar', role: 'cut'},
+        {label: 'Limpar', role: 'to clean'},
+        {label: 'selecionar tudo', role: 'select all'}
+    ]},
+    {label: 'Exibir', 
+        submenu: [
+        {label: 'Zoom+', role: 'zoomin'},
+        {label: 'Zoom-', role: 'zoomout'}
+    ]}
+]
+
