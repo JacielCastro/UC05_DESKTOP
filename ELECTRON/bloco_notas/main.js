@@ -1,4 +1,4 @@
-import {app, BrowserWindow, dialog, ipcMain, Menu} from 'electron'
+import {app, BrowserWindow, dialog, ipcMain, Menu, MenuItem, webContents} from 'electron'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
@@ -39,7 +39,6 @@ function escreverArq (conteudo){
         console.error(err)
     }
 }
-
 //função para abrir o arquivo
 async function lerArq(){
     let {canceled, filePaths} = await dialog.showOpenDialog({
@@ -61,7 +60,6 @@ async function lerArq(){
 }
 
 ipcMain.handle('salvar-arq', (event, texto) =>{
-    // console.log('Texto: ',texto)
     escreverArq(texto)    
     return caminhoArquivo
 })
@@ -93,13 +91,13 @@ const template = [
             {label: 'Novo Arquivo'},
             {label: 'Novo Janela'}
         ]},
-    {label: 'Abrir'},
-    {label: 'Salvar', 
+    {label: 'Abrir', click: () => janela.webContents.send('abrir')},
+    {label: 'Salvar',
         submenu: [
-            {label: 'Salvar'},
-            {label: 'Salvar como'}
+            {label: 'Salvar', click: () => janela.webContents.send('salvar')},
+            {label: 'Salvar como', click: () => janela.webContents.send('salvar-como')}
         ]},
-    {label: 'Sair'}
+    {label: 'Sair', click: () => janela.webContents.send('sair')}
         ] 
     },
     {label: 'Editar', 
@@ -118,4 +116,3 @@ const template = [
         {label: 'Zoom-', role: 'zoomout'}
     ]}
 ]
-
