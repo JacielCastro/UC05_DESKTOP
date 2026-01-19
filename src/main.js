@@ -1,29 +1,51 @@
-import { app, BrowserWindow, nativeTheme, ipcMain, Menu} from "electron";
-import { type } from "node:os";
-import path from 'node:path'
+import { app, BrowserWindow, nativeTheme, Menu } from "electron"
+import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename) 
 
-let janela = null
-
 const criarjanela = () => {
-    nativeTheme.themeSource = 'light' // MODO CLARO/ESCURO DA JANELA
     const janela = new BrowserWindow({
         width: 800,
         height: 800,
-        title: "Exemplo - Aplicação Desktop",
+        title: " PROJETO EM ELECTRON ",
         webPreferences:{
             nodeIntegration: false,
             contextIsolation: true,
             devTools: true,
             preload: path.join(__dirname,'preload.js'),
             sandbox: false,
-            setZoomFactor: 1.0 // deixando o zoom em 100%
-    }
-    })
-    janela.loadFile("./aula01_html/ques02.html")
+            setZoomFactor: 1.0
+}
+})
+// LIGANDO A TELA DE INTERAÇÃO DO JS COM O ELECTRON
+janela.loadFile(
+   path.join(__dirname,'src','paginas','style','login.js')
+)
+// MODO CLARO/ESCURO DA JANELA
+nativeTheme.themeSource = 'dark'
+// CAMINHO DO HTML DA JANELA
+janela.loadFile(
+    path.join(__dirname,"paginas","login.html")
+)
+// abre o console para DEBUG
+janela.webContents.openDevTools()
+// DECLARANDO OBJETO MENU NA APLICAÇÃO
+Menu.setApplicationMenu(null)
+
+}
+
+app.whenReady().then(() => {
+    criarjanela()
+})
+
+app.on('window-all-closed', () =>{
+   app.quit()
+})
+
+    
+/* janela.loadFile("./aula01_html/ques02.html")
     // janela.webContents.openDevTools()
     janela.removeMenu()
     janela.webContents.on('did-finish-load',() => {// EVENTO DISPARADO QUANDO A JANELA TERMINA DE CARREGAR
@@ -90,7 +112,7 @@ ipcMain.on('envia-msg', (event, msg) => {
     console.log('Mensagem do Rederer: ', msg)
     event.reply('devolver-msg', 'Olá')
 })
-
+*/
 
 
 

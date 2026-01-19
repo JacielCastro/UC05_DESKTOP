@@ -1,4 +1,4 @@
-
+/*
 console.log(`${window.api.versaoNode()}`)
 console.log(`${window.api.versaoElectron()}`)
 console.log(`${window.api.nome}`)
@@ -82,3 +82,4 @@ function enviarMsg() {
 window.api.receberMsg((event, msg) => {
         document.getElementById('msg2').innerHTML += `${msg}<br>`
 })
+*/

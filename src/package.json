@@ -1,7 +1,7 @@
 {
-  "name": "arquivos",
+  "name": "electron",
   "version": "1.0.0",
-  "description": "",
+  "description": "projeto_electron",
   "main": "main.js",
   "type": "module",
   "scripts": {
