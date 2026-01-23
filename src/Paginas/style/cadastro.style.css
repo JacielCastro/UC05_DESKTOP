@@ -1,0 +1,58 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f2f2;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastro-container {
+    background: white;
+    padding: 30px;
+    width: 350px; /* um pouco maior que o login */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.cadastro-container h2 {
+    margin-bottom: 20px;
+}
+
+.cadastro-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cadastro-container button {
+    width: 100%;
+    padding: 10px;
+    background: #28a745; /* verde para diferenciar do login */
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cadastro-container button:hover {
+    background: #218838;
+}
+
+.voltar-login {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.voltar-login a {
+    color: #007bff;
+    text-decoration: none;
+}
